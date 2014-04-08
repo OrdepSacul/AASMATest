@@ -25,6 +25,19 @@ public class Wander : MonoBehaviour {
             Destroy(other.gameObject);
             GameObject.Find("ResourceSpawner").GetComponent<ResourceSpawner>().RegisterPickup();
         }
+        else if (other.collider.tag == "Bomb")
+        {
+            //pick it up
+        }
+        else if (other.collider.tag == "Blue" && this.tag == "Blue")
+        {
+            //assist
+        }
+        else if (other.collider.tag == "Red" && this.tag == "Blue")
+        {
+            //fight
+        }
+
     }
 
 
@@ -41,6 +54,18 @@ public class Wander : MonoBehaviour {
         else if (other.collider2D.tag == "Red" && this.tag == "Blue")
         {
             Debug.Log("ENEMYY!!!");
+        }
+        else if (other.collider2D.tag == "CaptureA")
+        {
+            Debug.Log("Capture point A!!!");
+        }
+        else if (other.collider2D.tag == "CaptureB")
+        {
+            Debug.Log("Capture point B!!!");
+        }
+        else if (other.collider2D.tag == "Bomb")
+        {
+            Debug.Log("Bomb!!!");
         }
     }
 
