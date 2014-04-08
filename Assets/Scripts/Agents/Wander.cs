@@ -5,7 +5,7 @@ public class Wander : MonoBehaviour {
 
 
     private Vector3 moveDirection;
-
+    //private ResourceSpawner resScript = GameObject.Find("ResourceSpawner").GetComponent<ResourceSpawner>();
     private int moveSpeed = 2;
 
 	// Use this for initialization
@@ -13,6 +13,38 @@ public class Wander : MonoBehaviour {
 	
 	}
 	
+
+    int score = 0;
+ 
+    //only works on non-trigger colliders
+    void OnCollisionEnter2D( Collision2D other) {
+
+        Debug.Log("Collision!");
+        if (other.collider.tag == "Coin") {
+            score += 5;
+            Destroy(other.gameObject);
+            GameObject.Find("ResourceSpawner").GetComponent<ResourceSpawner>().RegisterPickup();
+        }
+    }
+
+
+    //only works on trigger colliders
+    void OnTriggerEnter2D( Collider2D other ) { 
+        //check tag and act accordingly
+        if (other.collider2D.tag == "Coin") {
+            Debug.Log("Saw a coin!!");
+        }
+        else if (other.collider2D.tag == "Blue" && this.tag == "Blue")
+        {
+            Debug.Log("BROOOO!!");
+        }
+        else if (other.collider2D.tag == "Red" && this.tag == "Blue")
+        {
+            Debug.Log("ENEMYY!!!");
+        }
+    }
+
+
 	// Update is called once per frame
 	void Update () {
         
@@ -37,6 +69,9 @@ public class Wander : MonoBehaviour {
 
         Vector3 target = moveDirection * moveSpeed + currentPosition;
         transform.position = Vector3.Lerp(currentPosition, target, Time.deltaTime);
+
+
+
 
 
 	}
