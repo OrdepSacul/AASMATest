@@ -23,7 +23,7 @@ public class Wander : MonoBehaviour {
         if (other.collider.tag == "Coin") {
             score += 5;
             Destroy(other.gameObject);
-            GameObject.Find("ResourceSpawner").GetComponent<ResourceSpawner>().RegisterPickup();
+            GameObject.Find("ResourceSpawner").GetComponent<ResourceSpawner>().RegisterPickup( this.tag );
         }
         else if (other.collider.tag == "Bomb")
         {
